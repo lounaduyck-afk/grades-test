@@ -317,3 +317,31 @@ ggplot(hist_counts_sex, aes(x = group, y = n_hist, fill = sex)) +
 ```
 
 There is no significant difference in the number of History grades between male and female students. Both sexes receive almost the same number of assessments, and this pattern is consistent across groups.
+
+# V. Grade analysis
+
+### Question 19
+
+```{r}
+avg_per_course <- grades |>
+  filter(!is.na(grade)) |>
+  summarise(
+    mean_grade = mean(grade),
+    .by = c(id, course_id)
+  ) |>
+  inner_join(course, by = "course_id") |>
+  inner_join(students |> select(id, group), by = "id")
+
+avg_wide <- avg_per_course |>
+  select(id, group, course, mean_grade) |>
+  pivot_wider(
+    id_cols = c(id, group),
+    names_from = course,
+    values_from = mean_grade
+  )
+
+avg_wide |>
+  select(id, group, `Architecture and Sculpture`, `Astronomy and Cosmology`) |>
+  slice_head(n = 5) |>
+  kable()
+```
