@@ -443,3 +443,17 @@ ggplot(final_df, aes(x = group, y = final_grade)) +
 ```
 
 The final-grade distribution varies significantly across groups. Some groups (11, 18, 8) perform better, with high medians and low dispersion, while others (15, 5, 20, 9) have lower medians. Variability within groups is generally small, suggesting that students belonging to the same group have similar levels of performance. A few outliers appear, but they do not affect the overall group-level trends.
+
+### Question 25
+
+```{r}
+ggplot(final_df, aes(x = group, y = final_grade, fill = sex)) +
+  geom_boxplot(position = "dodge") +
+  labs(
+    x = "Group",
+    y = "Final grade",
+    fill = "Sex"
+  )
+```
+
+In this graph, we see that final grades vary across groups, with some groups performing better on average. Male and female students have very similar performance within each group, with no apparent gender advantage. We see that differences between groups are much larger than differences between sexes, so group level factor play a larger role than sex in final grade differences.
