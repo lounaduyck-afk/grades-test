@@ -1,7 +1,9 @@
 ---
 title: "grade-test"
 author: "DUYCK Louna"
-format: html
+format:
+  html: default
+  pdf: default
 editor: visual
 ---
 
@@ -119,6 +121,8 @@ ggplot(students, aes(x = age)) +
   labs(x = "Age (years)", y = "Number of students")
 ```
 
+The histogram shows that most students are very young, with ages concentrated between 20 and 23 years old, and more than 250 students at age 21–22. After age 25, the number of students drops, indicating that older students are rare in the dataset.
+
 ### Question 8
 
 ```{r}
@@ -182,6 +186,8 @@ ggplot(astro_group, aes(x = group, y = mean_grade)) +
     y = "Average grade in Astronomy and Cosmology"
   )
 ```
+
+We can see that the mean in this course is around 7.
 
 ### Question 12
 
@@ -248,6 +254,8 @@ ggplot(grades_per_student, aes(x = n_grades, fill = sex)) +
   labs(x = "Number of grades", y = "Number of students", fill = "Sex")
 
 ```
+
+This histogram shows that most students have between 62 and 65 grades, with very few students below 60 or above 66. The distributions for males and females are very similar, indicating no meaningful difference between sexes in the total number of grades received.
 
 ### Question 15
 
