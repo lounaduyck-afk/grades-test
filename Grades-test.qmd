@@ -300,3 +300,20 @@ ggplot(hist_counts, aes(x = group, y = n_hist)) +
 ```
 
 There is no meaningful dependence between the group and the number of History grades and all groups receive approximately the same number of History evaluations.
+
+### Question 18
+
+```{r}
+hist_counts_sex <- hist_counts |>
+  left_join(students |> select(id, sex), by = "id")
+
+ggplot(hist_counts_sex, aes(x = group, y = n_hist, fill = sex)) +
+  geom_boxplot(position = "dodge") +
+  labs(
+    x = "Group",
+    y = "Number of History grades",
+    fill = "Sex"
+  )
+```
+
+There is no significant difference in the number of History grades between male and female students. Both sexes receive almost the same number of assessments, and this pattern is consistent across groups.
