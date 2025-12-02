@@ -5,6 +5,8 @@ format: html
 editor: visual
 ---
 
+Link of the Github repository : <https://github.com/lounaduyck-afk/grades-test.git>
+
 ```{r}
 here::i_am("grades-test.Rproj")
 library(here)
@@ -200,3 +202,36 @@ ggplot(grades_sem, aes(x = grade, fill = factor(semester))) +
 ```
 
 The grade distribution in the second semester presents a peak around 8-10 while the one in the first semester is around 7. Also the distribution of semester 1 is flatter and more spread out, which suggests more variability in students' performance.
+
+# IV. Attendance analysis
+
+### Question 13
+
+```{r}
+grades_students <- grades |>
+  filter(!is.na(grade)) |>
+  inner_join(students, by = "id")
+
+grades_per_student <- grades_students |>
+  summarise(
+    n_grades = n(),
+    .by = c(id, group, sex)
+  )
+
+
+grades_per_student |>
+  slice_head(n = 10) |>
+  kable()
+
+grades_summary <- grades_per_student |>
+  summarise(
+    min    = min(n_grades),
+    max    = max(n_grades),
+    mean   = mean(n_grades),
+    median = median(n_grades)
+  )
+
+grades_summary |>
+  kable()
+
+```
