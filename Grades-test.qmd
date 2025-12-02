@@ -86,3 +86,10 @@ ggplot(students, aes(x = group)) +
 ```
 
 ### Question 6
+```{r}
+ggplot(students, aes(x = group, fill = sex)) +
+  geom_bar(position = "fill") +
+  labs(x = "Group", y = "Proportion", fill = "Sex")
+```
+
+### Question 7
