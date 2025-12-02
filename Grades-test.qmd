@@ -4,6 +4,7 @@ author: "DUYCK Louna"
 format: html
 editor: visual
 ---
+
 ```{r}
 here::i_am("grades-test.Rproj")
 library(here)
@@ -15,10 +16,13 @@ library(tidyr)
 library(lubridate)
 library(knitr)
 ```
-# Introduction
-## Study organisation
+
+# I. Introduction
+
+## 1. Study organisation
 
 ### Question 1
+
 ```{r}
 course <- vroom(
   here("data", "courses.csv"),
@@ -32,6 +36,7 @@ course <- vroom(
 ```
 
 ### Question 2
+
 ```{r}
 courses_table <- course |>
   arrange(course) |>
@@ -46,7 +51,8 @@ courses_table |>
   kable()
 ```
 
-## Students
+## 2. Students
+
 ```{r}
 students <- vroom(
   here("data", "students.csv"),
@@ -60,10 +66,13 @@ students <- vroom(
 class(students$birth_date)
 class(students$sex)
 ```
+
 The `birth_date` column of the students data frame is of class Date, and `sex` is a factor.
 
-## Grades
+## 3. Grades
+
 ### Question 4
+
 ```{r}
 grades <- vroom(
   here("data", "grades.csv"),
@@ -77,9 +86,10 @@ grades <- vroom(
 )
 ```
 
+# II. Students population analysis
 
-# Students population analysis
 ### Question 5
+
 ```{r}
 ggplot(students, aes(x = group)) +
   geom_bar() +
@@ -87,6 +97,7 @@ ggplot(students, aes(x = group)) +
 ```
 
 ### Question 6
+
 ```{r}
 ggplot(students, aes(x = group, fill = sex)) +
   geom_bar(position = "fill") +
@@ -94,6 +105,7 @@ ggplot(students, aes(x = group, fill = sex)) +
 ```
 
 ### Question 7
+
 ```{r}
 students <- students |>
   mutate(
@@ -105,3 +117,16 @@ ggplot(students, aes(x = age)) +
   labs(x = "Age (years)", y = "Number of students")
 ```
 
+### Question 8
+
+```{r}
+median_age_group <- students |>
+  summarise(
+    median_age = round(median(age)),
+    .by = group
+  )
+
+median_age_group |>
+  arrange(group) |>
+  kable()
+```
