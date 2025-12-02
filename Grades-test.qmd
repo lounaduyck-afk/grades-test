@@ -157,3 +157,26 @@ nb_grades
 ```
 
 The data set contains 53616 grades.
+
+### Question 11
+
+```{r}
+astro_id <- course |>
+  filter(course == "Astronomy and Cosmology") |>
+  pull(course_id)
+
+astro_group <- grades |>
+  filter(course_id == astro_id, !is.na(grade)) |>
+  inner_join(students, by = "id") |>
+  summarise(
+    mean_grade = mean(grade),
+    .by = group
+  )
+
+ggplot(astro_group, aes(x = group, y = mean_grade)) +
+  geom_col() +
+  labs(
+    x = "Group",
+    y = "Average grade in Astronomy and Cosmology"
+  )
+```
