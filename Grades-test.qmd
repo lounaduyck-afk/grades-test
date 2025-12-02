@@ -270,3 +270,20 @@ hist_counts |>
   slice_head(n = 10) |>
   kable()
 ```
+
+### Question 16
+
+```{r}
+hist_dist <- hist_counts |>
+  summarise(
+    n_students = n(),
+    .by = n_hist
+  )
+
+ggplot(hist_dist, aes(x = n_hist, y = n_students)) +
+  geom_col() +
+  labs(
+    x = "Number of History grades",
+    y = "Number of students"
+  )
+```
