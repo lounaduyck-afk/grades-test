@@ -4,3 +4,22 @@ author: "DUYCK Louna"
 format: html
 editor: visual
 ---
+```{r}
+here::i_am("grades-test.Rproj")
+library(here)
+library(readr)
+library(ggplot2)
+library(vroom)
+library(dplyr)
+library(tidyr)
+```
+# Introduction
+## Study organisation
+
+### Question 1
+```{r}
+course <- vroom(here("data","courses.csv"))
+```
+### Question 2
+
+
