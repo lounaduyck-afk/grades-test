@@ -144,3 +144,14 @@ oldest_by_group <- students |>
 oldest_by_group |>
   kable()
 ```
+
+# III. Simple grade analysis
+
+### Question 10
+
+```{r}
+nb_grades <- grades |>
+  summarise(n = sum(!is.na(grade))) |>
+  pull(n)
+nb_grades
+```
