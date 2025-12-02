@@ -415,3 +415,21 @@ avg_wide |>
 ```
 
 For Group 12 (group with the highest correlation coefficient), the inverse relationship between the two courses is strong. It seems like students are divided in two profiles : those wjo excel at mythological and cultural content and those who excel at artistic and creative tasks. In this group, we observe most polarized academic behavior. \
+
+### Question 23
+
+```{r}
+course_names <- course$course
+
+final_df <- avg_wide |>
+  mutate(
+    final_grade = rowMeans(across(all_of(course_names)))
+  ) |>
+  inner_join(students |> select(id, sex), by = "id") |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+final_df |>
+  slice_head(n = 5) |>
+  kable()
+```
