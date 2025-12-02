@@ -155,3 +155,5 @@ nb_grades <- grades |>
   pull(n)
 nb_grades
 ```
+
+The data set contains 53616 grades.
