@@ -364,3 +364,28 @@ ggplot(
     y = "Average grade in Rhetoric and Persuasion"
   )
 ```
+
+### Question 21
+
+```{r}
+corr_by_group <- avg_wide |>
+  summarise(
+    corr = cor(`Music and Poetry`, `Greek Mythology and Folklore`),
+    .by = group
+  )
+
+corr_by_group |>
+  kable()
+
+ggplot(corr_by_group, aes(x = group, y = corr)) +
+  geom_col(fill = "steelblue") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Correlation between Music & Poetry and Greek Mythology & Folklore by Group",
+    x = "Group",
+    y = "Correlation"
+  ) +
+  theme_minimal()
+```
+
+We observe that the correlation is negative for all groups, meaning that students who perform well in one course tend to perform less well in the other.
