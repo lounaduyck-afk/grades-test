@@ -12,6 +12,7 @@ library(ggplot2)
 library(vroom)
 library(dplyr)
 library(tidyr)
+library(lubridate)
 library(knitr)
 ```
 # Introduction
@@ -93,3 +94,14 @@ ggplot(students, aes(x = group, fill = sex)) +
 ```
 
 ### Question 7
+```{r}
+students <- students |>
+  mutate(
+    age = time_length(today() - birth_date, unit = "year") |> round()
+  )
+
+ggplot(students, aes(x = age)) +
+  geom_histogram(binwidth = 1, boundary = 0) +
+  labs(x = "Age (years)", y = "Number of students")
+```
+
