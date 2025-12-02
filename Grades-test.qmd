@@ -542,3 +542,27 @@ course_fail_counts |>
 ```
 
 The course most responsible of students failure owing to grades below than 5 is Combat and Martial Arts of the Gods.
+
+### Question 30
+
+```{r}
+pass_age <- pass_table |>
+  inner_join(students |> select(id, age), by = "id")
+
+age_success <- pass_age |>
+  summarise(
+    success_rate = mean(pass),
+    .by = age
+  )
+
+ggplot(age_success, aes(x = factor(age), y = success_rate)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    x = "Age",
+    y = "Success rate",
+    title = "Success rate by age"
+  ) +
+  theme_minimal()
+```
+
+Success rate is generally low across all ages, with no meaningful upward or downward trend. A few isolated ages (31 and 33) show artificially high success rates, likely due to very small sample sizes rather than a real age effect.
