@@ -365,6 +365,8 @@ ggplot(
   )
 ```
 
+We can observe that there is no meaningful linear correlation between performance in Combat and Martial Art of the Gods and performance in Rhetoric and Persuasion. The positive slope suggests a tiny association, but as there is a very large dispersion of the points, we can say that success in one of these two courses does not predict success in the other. Students appear to perform independently in these two courses.
+
 ### Question 21
 
 ```{r}
@@ -389,3 +391,27 @@ ggplot(corr_by_group, aes(x = group, y = corr)) +
 ```
 
 We observe that the correlation is negative for all groups, meaning that students who perform well in one course tend to perform less well in the other.
+
+### Question 22
+
+```{r}
+best_group <- corr_by_group |>
+  slice_max(abs(corr), n = 1) |>
+  pull(group)
+
+avg_wide |>
+  filter(group == best_group) |>
+  ggplot(aes(
+    x = `Greek Mythology and Folklore`,
+    y = `Music and Poetry`
+  )) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) +
+  labs(
+    title = paste("Group", best_group),
+    x = "Average grade in Greek Mythology and Folklore",
+    y = "Average grade in Music and Poetry"
+  )
+```
+
+For Group 12 (group with the highest correlation coefficient), the inverse relationship between the two courses is strong. It seems like students are divided in two profiles : those wjo excel at mythological and cultural content and those who excel at artistic and creative tasks. In this group, we observe most polarized academic behavior. \
