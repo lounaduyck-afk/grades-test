@@ -130,3 +130,17 @@ median_age_group |>
   arrange(group) |>
   kable()
 ```
+
+### Question 9
+
+```{r}
+oldest_by_group <- students |>
+  group_by(group) |>
+  filter(age == max(age)) |>
+  ungroup() |>
+  select(id, group, sex, age) |>
+  arrange(desc(age), group, id)
+
+oldest_by_group |>
+  kable()
+```
