@@ -505,3 +505,19 @@ n_fail_high
 ```
 
 105 students do not pass despite a final grade superior or equal to 10.
+
+### Question 28
+
+```{r}
+pass_rate_group <- pass_table |>
+  summarise(
+    pass_rate = mean(pass),
+    .by = group
+  )
+
+ggplot(pass_rate_group, aes(x = group, y = pass_rate)) +
+  geom_col() +
+  labs(x = "Group", y = "Pass rate")
+```
+
+The graph shows strong heterogeneity in academic success across groups. As we saw in the previous representations, a few groups (8, 11, 1) show relatively high pass rates, but most of the groups have low success rates. This suggests major disparities in performance.
