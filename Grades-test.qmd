@@ -521,3 +521,24 @@ ggplot(pass_rate_group, aes(x = group, y = pass_rate)) +
 ```
 
 The graph shows strong heterogeneity in academic success across groups. As we saw in the previous representations, a few groups (8, 11, 1) show relatively high pass rates, but most of the groups have low success rates. This suggests major disparities in performance.
+
+### Question 29
+
+```{r}
+failing_ids <- pass_table |>
+  filter(!pass) |>
+  pull(id)
+
+course_fail_counts <- avg_per_course |>
+  filter(id %in% failing_ids, mean_grade < 5) |>
+  summarise(
+    n_students = n_distinct(id),
+    .by = course
+  ) |>
+  arrange(desc(n_students))
+
+course_fail_counts |>
+  kable()
+```
+
+The course most responsible of students failure owing to grades below than 5 is Combat and Martial Arts of the Gods.
