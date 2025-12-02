@@ -19,7 +19,15 @@ library(knitr)
 
 ### Question 1
 ```{r}
-course <- vroom(here("data","courses.csv"))
+course <- vroom(
+  here("data", "courses.csv"),
+  col_types = cols(
+    course    = col_character(),
+    course_id = col_integer(),
+    semester  = col_integer(),
+    nb_grades = col_integer()
+  )
+)
 ```
 ### Question 2
 ```{r}
@@ -35,5 +43,21 @@ courses_table <- course |>
 courses_table |>
   kable()
 ```
+
+## Students
+```{r}
+students <- vroom(
+  here("data", "students.csv"),
+  col_types = cols(
+    id         = col_integer(),
+    group      = col_factor(),
+    birth_date = col_date(format = ""),
+    sex        = col_factor()
+  )
+)
+class(students$birth_date)
+class(students$sex)
+```
+The `birth_date` column of the students data frame is of class Date, and `sex` is a factor.
 
 
