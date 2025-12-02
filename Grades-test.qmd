@@ -457,3 +457,39 @@ ggplot(final_df, aes(x = group, y = final_grade, fill = sex)) +
 ```
 
 In this graph, we see that final grades vary across groups, with some groups performing better on average. Male and female students have very similar performance within each group, with no apparent gender advantage. We see that differences between groups are much larger than differences between sexes, so group level factor play a larger role than sex in final grade differences.
+
+### Question 26
+
+Conditions :
+
+-   No course average \< 5
+
+<!-- -->
+
+-   Sem1 average ≥ 10
+
+-   Sem2 average ≥ 10
+
+```{r}
+pass_summary <- avg_per_course |>
+  summarise(
+    min_course_avg = min(mean_grade),
+    sem1_avg = mean(mean_grade[semester == 1]),
+    sem2_avg = mean(mean_grade[semester == 2]),
+    .by = id
+  ) |>
+  mutate(
+    pass = min_course_avg >= 5 &
+           sem1_avg      >= 10 &
+           sem2_avg      >= 10
+  )
+
+pass_table <- pass_summary |>
+  inner_join(final_df |> select(id, group, sex, final_grade), by = "id") |>
+  select(id, group, sex, final_grade, pass)
+
+pass_table |>
+  slice_head(n = 5) |>
+  kable()
+
+```
