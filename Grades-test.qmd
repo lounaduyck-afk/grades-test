@@ -493,3 +493,15 @@ pass_table |>
   kable()
 
 ```
+
+### Question 27
+
+```{r}
+fail_high <- pass_table |>
+  filter(!pass, final_grade >= 10)
+
+n_fail_high <- nrow(fail_high)
+n_fail_high
+```
+
+105 students do not pass despite a final grade superior or equal to 10.
