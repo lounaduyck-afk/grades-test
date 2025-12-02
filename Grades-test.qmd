@@ -433,3 +433,13 @@ final_df |>
   slice_head(n = 5) |>
   kable()
 ```
+
+### Question 24
+
+```{r}
+ggplot(final_df, aes(x = group, y = final_grade)) +
+  geom_boxplot() +
+  labs(x = "Group", y = "Final grade")
+```
+
+The final-grade distribution varies significantly across groups. Some groups (11, 18, 8) perform better, with high medians and low dispersion, while others (15, 5, 20, 9) have lower medians. Variability within groups is generally small, suggesting that students belonging to the same group have similar levels of performance. A few outliers appear, but they do not affect the overall group-level trends.
