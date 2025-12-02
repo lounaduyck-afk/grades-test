@@ -248,3 +248,25 @@ ggplot(grades_per_student, aes(x = n_grades, fill = sex)) +
   labs(x = "Number of grades", y = "Number of students", fill = "Sex")
 
 ```
+
+### Question 15
+
+```{r}
+hist_id <- course |>
+  filter(course == "History and Civilization of Ancient Greece") |>
+  pull(course_id)
+
+hist_counts <- students |>
+  select(id, group) |>
+  left_join(
+    grades |>
+      filter(course_id == hist_id, !is.na(grade)) |>
+      summarise(n_hist = n(), .by = id),
+    by = "id"
+  ) |>
+  mutate(n_hist = replace_na(n_hist, 0L))
+
+hist_counts |>
+  slice_head(n = 10) |>
+  kable()
+```
