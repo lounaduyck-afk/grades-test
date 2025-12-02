@@ -345,3 +345,22 @@ avg_wide |>
   slice_head(n = 5) |>
   kable()
 ```
+
+### Question 20
+
+```{r}
+ggplot(
+  avg_wide,
+  aes(
+    x = `Combat and Martial Arts of the Gods`,
+    y = `Rhetoric and Persuasion`
+  )
+) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) +
+  coord_equal() +
+  labs(
+    x = "Average grade in Combat and Martial Arts of the Gods",
+    y = "Average grade in Rhetoric and Persuasion"
+  )
+```
