@@ -287,3 +287,16 @@ ggplot(hist_dist, aes(x = n_hist, y = n_students)) +
     y = "Number of students"
   )
 ```
+
+### Question 17
+
+```{r}
+ggplot(hist_counts, aes(x = group, y = n_hist)) +
+  geom_boxplot() +
+  labs(
+    x = "Group",
+    y = "Number of History grades"
+  )
+```
+
+There is no meaningful dependence between the group and the number of History grades and all groups receive approximately the same number of History evaluations.
