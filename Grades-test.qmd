@@ -235,3 +235,16 @@ grades_summary |>
   kable()
 
 ```
+
+### Question 14
+
+```{r}
+ggplot(grades_per_student, aes(x = n_grades, fill = sex)) +
+  geom_histogram(
+    position = "dodge",
+    binwidth = 1,
+    boundary = 0
+  ) +
+  labs(x = "Number of grades", y = "Number of students", fill = "Sex")
+
+```
