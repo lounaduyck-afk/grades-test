@@ -180,3 +180,23 @@ ggplot(astro_group, aes(x = group, y = mean_grade)) +
     y = "Average grade in Astronomy and Cosmology"
   )
 ```
+
+### Question 12
+
+```{r}
+grades_sem <- grades |>
+  filter(!is.na(grade)) |>
+  inner_join(course, by = "course_id")
+
+ggplot(grades_sem, aes(x = grade, fill = factor(semester))) +
+  geom_density(alpha = 0.4) +
+  labs(x = "Grade", fill = "Semester")
+```
+
+```{r}
+ggplot(grades_sem, aes(x = grade, fill = factor(semester))) +
+  geom_boxplot(aes(y = factor(semester))) +
+  labs(x = "Grade", fill = "Semester")
+```
+
+The grade distribution in the second semester presents a peak around 8-10 while the one in the first semester is around 7. Also the distribution of semester 1 is flatter and more spread out, which suggests more variability in students' performance.
